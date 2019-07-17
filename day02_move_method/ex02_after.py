@@ -1,18 +1,17 @@
 class Person:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-class Discount:
-    def __init__(self, person): self.__person = person
-    def get_money(self, money): return self.get_discount() * money
+    def __init__(self, age): self.age = age
 
-    # 问题：该方法 Discount 类使用的更多，应该移动到 Discount 类中
-    # 重构：将方法移动到 Discount 类中
-    def get_discount(self):
-        return 0.5 if any([self.__person.age <= 6, self.__person.age >= 60]) else 1
+class Park:
+    def __init__(self, person): self.person = person
+
+    # 重构：将get_discount函数移动到Park类中
+    def sell_ticket(self): return 0.5 if any([self.person.age <= 6, self.person.age >= 60]) else 1
+
+    # 重构：方法移动到Park类中，就可以直接调用内部的方法了
+    def get_money(self, money): return self.sell_ticket() * money
 
 if __name__ == '__main__':
-    p1 = Person('小铭', 18)
-    p2 = Person('大蜥蜴', 70)
-    print(Discount(p1).get_money(1000))
-    print(Discount(p2).get_money(1000))
+    p1 = Person(18)
+    p2 = Person(70)
+    print(Park(p1).get_money(100))
+    print(Park(p2).get_money(100))

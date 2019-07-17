@@ -1,10 +1,12 @@
 class Pet: pass
+
 class Fish(Pet):
-    # 重构：将游泳方法下降到 Fish 类中
-    def swim(self): print(self.swim)
+    # 重构：将swim方法下降到Fish子类
+    def swim(self): print(f'{self.__class__.__name__} is swimming')
+
 class Bird(Pet):
-    # 重构：将飞翔方法下降到 Bird 类中
-    def fly(self): print(self.fly)
+    # 重构：将fly方法下降到Bird子类
+    def fly(self): print(f'{self.__class__.__name__} is flying')
 
 if __name__ == '__main__':
     Fish().swim()
