@@ -3,6 +3,19 @@
 """ex01_sean_chambers.py"""
 
 # 提取工厂类
+
+"""
+Todays refactoring was first coined by the GangOfFour and has many resources on the web that have different usages of this pattern. 
+Two different aims of the factory pattern can be found on the GoF website here and here.
+
+Often in code some involved setup of objects is required in order to get them into a state where we can begin working with them. 
+Uusally this setup is nothing more than creating a new instance of the object and working with it in whatever manner we need. 
+Sometimes however the creation requirements of this object may grow and clouds the original code that was used to create the object. 
+This is where a Factory class comes into play. For a full description of the factory pattern you can read more here. 
+On the complex end of the factory pattern is for creating families of objects using Abstract Factory. 
+Our usage is on the basic end where we have one factory class creating one specific instance for us. 
+Take a look at the code before:
+"""
 # 今天的重构是由 GangOfFour 首先提出的，网络上有很多关于该模式不同用法的资源。
 # 在 GoF 网站上的这里 和这里有关于工厂模式的两个不同用法。
 # 在代码中，通常需要一些复杂的对象创建工作，以使这些对象达到一种可以使用的状态。
@@ -26,6 +39,16 @@ class PolliceCarController:
         policecar.service_required = service_required
         policecar.mileague = mileague
         return policecar
+
+
+"""
+As we can see, the new action is responsible for creating a PoliceCar and then setting some initial properties 
+on the police car depending on some external input. 
+This works fine for simple setup, but over time this can grow and the burden of creating the police car 
+is put on the controller which isn’t really something that the controller should be tasked with. 
+In this instance we can extract our creation code and place in a Factory class 
+that has the distinct responsibility of create instances of PoliceCar’s
+"""
 
 
 # 如您所见，new_car 方法负责创建 PoliceCar 并根据一些外部输入初始化 PoliceCar 的某些属性。
@@ -55,5 +78,12 @@ class PolliceCarController:
 
     def new_car(self, mileague, service_required):
         return self.i_policecar_factory.create(mileague, service_required)
+
+
+"""
+Now that we have the creation logic put off to a factory, 
+we can add to that one class that is tasked with creating instances for us without the worry of missing something 
+during setup or duplicating code.
+"""
 
 # 由于将创建的逻辑转移到了工厂中，我们可以添加一个类来专门负责实例的创建，而不必担心在创建或复制代码的过程中有所遗漏。

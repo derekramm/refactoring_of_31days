@@ -2,12 +2,29 @@
 # -*- coding:utf-8 -*-
 """ex01_sean_chambers.py"""
 
-
 # 引入参数对象
+
+"""
+This refactoring comes from Fowler’s refactoring catalog and can be found here
+
+Sometimes when working with a method that needs several parameters it becomes difficult to read the method signature 
+because of five or more parameters being passed to the method like so:
+"""
+
+
 # 该重构来自于 Fowler 的重构目录，参见这里。
 # 有时当使用一个包含多个参数的方法时，由于参数过多会导致可读性严重下降，如:
 
 def create(amount, student, courses, credits): pass
+
+
+"""
+In this instances it’s useful to create a class who’s only responsibility is to carry parameters into the method. 
+This helps make the code more flexible because to add more parameters, 
+you need only to add another field to the parameter object. 
+Be careful to only use this refactoring when you find that you have a large number of parameters to pass to the method 
+however as it does add several more classes to your codebase and should be kept to a minimum.
+"""
 
 
 # 这时有必要新建一个类，负责携带方法的参数。

@@ -2,8 +2,19 @@
 # -*- coding:utf-8 -*-
 """ex01_sean_chambers.py"""
 
-
 # 使用条件判断代替异常
+
+"""
+Today’s refactoring doesn’t come from any place specifically, 
+just something I’ve picked up over time that I find myself using often. 
+Any variations/comments would be appreciated to this approach. 
+I think there’s some other good refactorings around these type of problems.
+
+A common code smell that I come across from time to time is using exceptions to control program flow. 
+You may see something to this effect:
+"""
+
+
 # 今天的重构没有什么出处，是我平时经常使用而总结出来的。
 # 欢迎您发表任何改进意见或建议。
 # 我相信一定还有其他比较好的重构可以解决类似的问题。
@@ -23,6 +34,14 @@ class Microwave:
         except Exception:
             food_cooked = False
         return food_cooked
+
+
+"""
+Exceptions should only be there to do exactly what they are for, handle exceptional behavior. 
+Most of the time you can replace this type of code with a proper conditional and handle it properly. 
+This is called design by contract in the after example because we are ensuring a specific state of the Motor class 
+before performing the necessary work instead of letting an exception handle it.
+"""
 
 
 # 异常应该仅仅完成自己的本职工作：处理异常行为。

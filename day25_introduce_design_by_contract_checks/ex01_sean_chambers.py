@@ -2,8 +2,15 @@
 # -*- coding:utf-8 -*-
 """ex01_sean_chambers.py"""
 
-
 # 引入契约式设计
+
+"""
+Design By Contract or DBC defines that methods should have defined input and output verifications. Therefore, you can be sure you are always working with a usable set of data in all methods and everything is behaving as expected. If not, exceptions or errors should be returned and handled from the methods. To read more on DBC read the wikipedia page here.
+
+In our example here, we are working with input parameters that may possibly be null. As a result a NullReferenceException would be thrown from this method because we never verify that we have an instance. During the end of the method, we don’t ensure that we are returning a valid decimal to the consumer of this method and may introduce methods elsewhere.
+"""
+
+
 # 契约式设计(DBC，Design By Contract)定义了方法应该包含输入和输出验证。
 # 因此，可以确保所有的工作都是基于可用的数据，并且所有的行为都是可预料的。
 # 否则，将返回异常或错误并在方法中进行处理。要了解更多关于 DBC 的内容，可以访问 wikipedia。
