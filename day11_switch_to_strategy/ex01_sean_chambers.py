@@ -1,15 +1,28 @@
 #!/usr/bin/evn python
 # -*- coding:utf-8 -*-
 """ex01_sean_chambers.py"""
+from abc import ABCMeta, abstractmethod
+from enum import Enum
 
 # 使用策略类
+
+"""
+Todays refactoring doesn’t come from any one source, 
+rather I’ve used different versions over the years and I’m sure other have different variations of the same aim.
+
+This refactoring is used when you have a larger switch statement that continually changes because of new conditions being added. 
+In these cases it’s often better to introduce the strategy pattern and encapsulate each condition in it’s own class. 
+The strategy refactoring I’m showing here is refactoring towards a dictionary strategy. 
+There is several ways to implement the strategy pattern, 
+the benefit of using this method is that consumers needn’t change after applying this refactoring.
+"""
+
+
 # 今天的重构没有固定的形式，多年来我使用过不同的版本，并且我敢打赌不同的人也会有不同的版本。
 # 该重构适用于这样的场景：switch 语句块很大，并且会随时引入新的判断条件。
 # 这时，最好使用策略模式将每个条件封装到单独的类中。
 # 实现策略模式的方式是很多的。
 # 我在这里介绍的策略重构使用的是字典策略， 这么做的好处是调用者不必修改原来的代码。
-from abc import ABCMeta, abstractmethod
-from enum import Enum
 
 
 class State(Enum):
@@ -45,6 +58,21 @@ class ClientCode:
     def calculate_shipping():
         shipping_info = ShippingInfo()
         return shipping_info.calculate_shipping_amount(State.Alaska)
+
+
+"""
+To apply this refactoring take the condition that is being tested and place it in it’s own class that adheres to a common interface. 
+Then by passing the enum as the dictionary key, we can select the proper implementation and execute the code at hand. 
+In the future when you want to add another condition, add another implementation and add the implementation to the ShippingCalculations dictionary. 
+As I stated before, this is not the only option to implement the strategy pattern. 
+I bold that because I know someone will bring this up in the comments :)  Use what works for you. 
+The benefit of doing this refactoring in this manner is that none of your client code will need to change. 
+All of the modifications exist within the ShippingInfo class.
+
+Jayme Davis pointed out that doing this refactoring really only ceates more classes because the binding still needs to be done via the ctor, 
+but would be more beneficial if the binding of your IShippingCalculation strategies can be placed into IoC and 
+that allows you to wire up strategies more easily.
+"""
 
 
 # 要应用该重构，需将每个测试条件至于单独的类中，这些类实现了一个共同的接口。
@@ -97,6 +125,16 @@ class ClientCode:
     def calculate_shipping():
         shipping_info = ShippingInfo()
         return shipping_info.calculate_shipping_amount(State.Alaska)
+
+
+"""
+To take this sample full circle, 
+Here is how you would wire up your bindings if you were using Ninject as your IoC container in the ShippingInfo constructor. 
+Quite a few things changed here, 
+mainly the enum for the state now lives in the strategy and ninject gives us a IEnumerable of all bindings to the constructor of IShippingInfo. 
+We then create a dictionary using the state property on the strategy to populate our dictionary and the rest is the same.
+ (thanks to Nate Kohari and Jayme Davis)
+"""
 
 
 # 为了使这个示例圆满，我们来看看在 ShippingInfo 构造函数中使用 Ninject 为 IoC 容器时如何进行绑定。
