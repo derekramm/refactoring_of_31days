@@ -45,7 +45,7 @@ it would save time and readability to seperate those distinct tasks into their o
 
 # 你会发现 CalculateGrandTotal 方法一共做了 3 件不同的事情：计算总额、折扣 和 发票税额。
 # 开发者为了搞清楚每个功能如何处理而不得不将代码从头看到尾。
-# 相比于此，向下面的代码那样将每个任务分解成单独的 方法则要节省更多时间，也更具可读性
+# 相比于此，向下面的代码那样将每个任务分解成单独的方法则要节省更多时间，也更具可读性
 
 class Receipt:
     def __init__(self, discounts, itemtotals):

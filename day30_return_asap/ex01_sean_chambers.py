@@ -42,11 +42,12 @@ class Order:
         self.__customer = None
 
     def calculate_order(self, customer, products, discount):
-        if len(products) == 0:
-            return 0
+        if len(products) == 0: return 0
+
         self.__customer = customer
+
         order_total = sum([p.price for p in products])
-        if discount == 0:
-            return order_total
+
+        if discount == 0: return order_total
         order_total -= discount
         return order_total

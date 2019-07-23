@@ -1,3 +1,8 @@
+#!/usr/bin/evn python
+# -*- coding:utf-8 -*-
+"""ex02_shopping_cart_before.py"""
+
+
 class OrderLine:
     """订单明细"""
 

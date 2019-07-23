@@ -11,7 +11,7 @@ Some of these circumstances is when there is additional logic associated with ad
 比如对集合的 add/remove 操作中包含其他的相关逻辑时
  
 Because of this reason, it is a good idea to only expose the collection as something you can iterate over without modifying the collection.
-因此，以可迭代但不直接在集合上进行操作的方式来暴露集合，是个不错的主意。
+因此，以可迭代但不能直接在集合上进行操作的方式来暴露集合，是个不错的主意。
  
 Let’s take a look at some code
 我们来看代码
@@ -31,7 +31,7 @@ class Order:
         只读属性
         :return: 只读订单明细列表
         """
-        return tuple(self.__orderlines)
+        return tuple(self.__orderlines)  # 重点：将列表转换为元组
 
     @property
     def ordertotal(self):
@@ -66,10 +66,10 @@ As you can see, we have encapsulated the collection as to not expose the Add/Rem
 如上述代码，我们对集合进行了封装，没有将 add/remove 方法暴露给类的使用者
 
 There is some other types in the .Net framework that will produce different behavior for encapsulating a collection
-.Net framework 中有些类，会由于封装集合而产生不同的行为
+.Net框架中的其它一些类型将产生用于封装集合的不同行为
  
 such as ReadOnlyCollection but they do have different caveats with each.
-例如只读集合 ReadOnlyCollection，但是他们都有不同的方法处理异常
+例如只读集合 ReadOnlyCollection，但是他们都有不同的注意事项
 
 This is a very straightforward refactoring and one worth noting.
 这是一个非常简单但是却极具价值的重构
